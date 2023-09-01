@@ -1,11 +1,13 @@
 import { CacheModule, Module, CacheInterceptor } from '@nestjs/common'
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core'
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler'
+import { PokemonModule } from './pokemon.module'
 import { AppController } from '../controllers/app.controller'
 import { AppService } from '../services/app.service'
 
 @Module({
   imports: [
+    PokemonModule,
     ThrottlerModule.forRootAsync({
       useFactory: () => ({
         ttl: Number(process.env.THROTTLE_TTL),
